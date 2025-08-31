@@ -39,6 +39,16 @@
 - 長距離、多地點測試 → 用 `SPIE`  
 - 小區域、快速 Demo → 可用 `mydicoor`  
 
+### RQT關係
+![](./images/rqt_graph.png)
+
+---
+
+## 開發環境
+- **CMake** 3.10+  
+- **C++17** 編譯器  
+- （ROS1 建置時需安裝）`roscpp`, `sensor_msgs`, `geometry_msgs`, `tf`, `nmea_msgs`
+
 ---
 
 ## 安裝 / 使用範例
@@ -69,11 +79,6 @@ make -j
 
 ## 與 Autoware 整合
 
-- ### RQT關係
-  ```
-  /nmea_sentence → nmea2tfpose → /gnss_pose (map frame) → ndt_matching
-  ```
-
 - ### 設定步驟
   1. 啟動 Serial GNSS 節點，發布 `/nmea_sentence`。  
   2. 啟動 `nmea2tfpose` 節點，參數：`plane: 13`（北科寧馨公園基準點）。  
@@ -93,6 +98,8 @@ GNSS-Localizer/
 ├── CMakeLists.catkin.txt
 ├── CMakeLists.cmake.txt
 ├── package.xml
+├── images
+│   └── rqt_graph.png
 ├── gnss/
 │   ├── geo_pos_conv_mydicoor.cpp    # 在地簡化座標轉換
 │   └── geo_pos_conv_SPIE.cpp        # 精確投影公式座標轉換

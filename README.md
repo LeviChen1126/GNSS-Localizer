@@ -40,6 +40,16 @@ Converts latitude/longitude (WGS84) → local Cartesian coordinates (x,y,z).
 - Large-scale, multi-location tests → use `SPIE`  
 - Small-area quick demos → `mydicoor` is sufficient  
 
+### RQT graph
+![](./images/rqt_graph.png)
+
+---
+
+## Development Environment
+- **CMake** 3.10+  
+- **C++17** compiler  
+- (For ROS1 build) `roscpp`, `sensor_msgs`, `geometry_msgs`, `tf`, `nmea_msgs`
+
 ---
 
 ## Installation / Usage Examples
@@ -70,11 +80,6 @@ make -j
 
 ## Integration with Autoware
 
-- ### RQT graph
-  ```
-  /nmea_sentence → nmea2tfpose → /gnss_pose (map frame) → ndt_matching
-  ```
-
 - ### Setup steps
   1. Launch the Serial GNSS node that publishes `/nmea_sentence`.  
   2. Launch the `nmea2tfpose` node with parameter `plane: 13` (Ningxin Park).  
@@ -94,6 +99,8 @@ GNSS-Localizer/
 ├── CMakeLists.catkin.txt
 ├── CMakeLists.cmake.txt
 ├── package.xml
+├── images
+│   └── rqt_graph.png
 ├── gnss/
 │   ├── geo_pos_conv_mydicoor.cpp    # Simplified local coordinate conversion
 │   └── geo_pos_conv_SPIE.cpp        # Accurate projection-based conversion
