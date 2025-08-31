@@ -40,7 +40,7 @@ Converts latitude/longitude (WGS84) → local Cartesian coordinates (x,y,z).
 - Large-scale, multi-location tests → use `SPIE`  
 - Small-area quick demos → `mydicoor` is sufficient  
 
-### RQT graph
+### RQT Graph
 ![](./images/rqt_graph.png)
 
 ---
