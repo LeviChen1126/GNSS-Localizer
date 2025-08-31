@@ -1,5 +1,5 @@
 # Normalize line endings across platforms
-* text=auto
+* text=auto eol=lf
 
 # Mark common binary files
 *.png binary
