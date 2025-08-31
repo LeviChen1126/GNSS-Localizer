@@ -25,7 +25,7 @@
 #include <iostream>
 #include <gnss/geo_pos_conv.hpp>
 
-static ros::Publisher pose_publisher, test_pub;
+static ros::Publisher pose_publisher;
 
 static ros::Publisher stat_publisher;
 static std_msgs::Bool gnss_stat_msg;
@@ -87,7 +87,8 @@ static void GNSSCallback(const sensor_msgs::NavSatFixConstPtr &msg)
   transform.setOrigin(tf::Vector3(pose.pose.position.x, pose.pose.position.y, pose.pose.position.z));
   q.setRPY(0, 0, yaw);
   transform.setRotation(q);
-  br.sendTransform(tf::StampedTransform(transform, msg->header.stamp, "map", "gps_back"));
+  br.sendTransform(tf::StampedTransform(transform, msg->header.stamp, "map", "gps"));
+  
 }
 
 int main(int argc, char **argv)
@@ -99,8 +100,6 @@ int main(int argc, char **argv)
   pose_publisher = nh.advertise<geometry_msgs::PoseStamped>("gnss_pose", 1000);
   stat_publisher = nh.advertise<std_msgs::Bool>("/gnss_stat", 1000);
   ros::Subscriber gnss_pose_subscriber = nh.subscribe("fix", 100, GNSSCallback);
-
-  test_pub = nh.advertise<geometry_msgs::PoseStamped>("test_pose", 1000);
 
   ros::spin();
   return 0;
