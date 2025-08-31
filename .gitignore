@@ -1,0 +1,44 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+/build/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+Makefile
+*.o
+*.so
+*.a
+*.exe
+
+# ROS / catkin / colcon
+/devel/
+/install/
+/log/
+
+# Python (if helper scripts exist)
+/__pycache__/
+/*.pyc
+*.pyo
+.venv/
+.env
+*.egg-info/
+
+# Jupyter Notebook checkpoints
+*.ipynb_checkpoints/
+
+# Data and logs
+/data/
+/dataset/
+/*.bag
+*.csv
+*.log
+*.bin
+*.tmp
+
+# IDE / Editor configs
+.vscode/
+.idea/
+*.swp

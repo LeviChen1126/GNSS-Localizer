@@ -1,0 +1,53 @@
+cmake_minimum_required(VERSION 3.0.2)
+project(gnss_localizer)
+
+add_compile_options(-std=c++17)
+
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  sensor_msgs
+  geometry_msgs
+  tf
+  nmea_msgs
+)
+
+catkin_package(
+  CATKIN_DEPENDS roscpp sensor_msgs geometry_msgs tf nmea_msgs
+)
+
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+  # include
+)
+
+# Nodes
+add_executable(nmea2tfpose
+  gnss_localizer/nmea2tfpose/nmea2tfpose_core_SPIE.cpp
+)
+
+add_executable(fix2tfpose
+  gnss_localizer/fix2tfpose/fix2tfpose.cpp
+)
+
+# If geo_pos_conv sources are required by the nodes, add them as sources or a static library
+add_library(geo_pos_conv_objs STATIC
+  gnss/geo_pos_conv_SPIE.cpp
+  gnss/geo_pos_conv_mydicoor.cpp
+)
+target_link_libraries(geo_pos_conv_objs ${catkin_LIBRARIES})
+
+target_link_libraries(nmea2tfpose
+  geo_pos_conv_objs
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(fix2tfpose
+  geo_pos_conv_objs
+  ${catkin_LIBRARIES}
+)
+
+install(TARGETS nmea2tfpose fix2tfpose geo_pos_conv_objs
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+)
