@@ -39,7 +39,7 @@
 - 長距離、多地點測試 → 用 `SPIE`  
 - 小區域、快速 Demo → 可用 `mydicoor`  
 
-### RQT關係
+### RQT 關係圖
 ![](./images/rqt_graph.png)
 
 ---
